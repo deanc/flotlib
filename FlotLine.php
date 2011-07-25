@@ -4,6 +4,7 @@ class FlotLine
 {
 	private $sets = array();
 	private $_id;
+	
 	function __construct($width = 1000, $height = 500)
 	{
 		$this->_id = md5(rand(1,999999));
@@ -12,7 +13,7 @@ class FlotLine
 		$this->height = $height;
 	}
 	
-	function addSet($setKey, $label, $extra = null)
+	public function addSet($setKey, $label, $extra = null)
 	{
 		$this->sets["$setKey"] = array(
 			'label' => $label
@@ -25,12 +26,12 @@ class FlotLine
 		}
 	}
 	
-	function addData($setKey, $k, $v)
+	public function addData($setKey, $k, $v)
 	{
 		$this->sets["$setKey"]['data'][] = array($k, $v);
 	}
 	
-	function draw()
+	public function draw()
 	{
 		echo '<div id="' . $this->_id . '" style="width:1200;height:700px"></div>';
 		echo '<script type="text/javascript">';
