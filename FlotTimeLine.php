@@ -1,6 +1,26 @@
 <?php
 
-class FlotLine
+/*
+	Initial usage instructions:
+	
+	$flot = new FlotLine;
+	
+	// add 1 data set
+	$flot->addSet('balance1', 'Balance 1');
+	$flot->addData('balance1', strtotime('01/01/2011'), 1000);
+	$flot->addData('balance1', strtotime('01/02/2011'), 1250);
+	$flot->addData('balance1', strtotime('01/03/2011'), 1700);
+	
+	// add another data set
+	$flot->addSet('balance2', 'Balance 2');
+	$flot->addData('balance2', strtotime('01/01/2011'), 2010);
+	$flot->addData('balance2', strtotime('01/02/2011'), 1789);
+	$flot->addData('balance2', strtotime('01/03/2011'), 1978);
+	
+	echo $flot->draw();
+	
+*/
+class FlotTimeLine
 {
 	private $sets = array();
 	private $_id;
