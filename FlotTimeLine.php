@@ -1,88 +1,19 @@
 <?php
 
-/*
-	Initial usage instructions:
-	
-	$flot = new FlotLine;
-	
-	// add 1 data set
-	$flot->addSet('balance1', 'Balance 1');
-	$flot->addData('balance1', strtotime('01/01/2011'), 1000);
-	$flot->addData('balance1', strtotime('01/02/2011'), 1250);
-	$flot->addData('balance1', strtotime('01/03/2011'), 1700);
-	
-	// add another data set
-	$flot->addSet('balance2', 'Balance 2');
-	$flot->addData('balance2', strtotime('01/01/2011'), 2010);
-	$flot->addData('balance2', strtotime('01/02/2011'), 1789);
-	$flot->addData('balance2', strtotime('01/03/2011'), 1978);
-	
-	echo $flot->draw();
-	
-*/
-class FlotTimeLine
+require_once('FlotLine.php');
+
+class FlotTimeLine extends FlotLine
 {
-	private $sets = array();
-	private $_id;
 	
 	function __construct($width = 1000, $height = 500)
 	{
-		$this->_id = md5(rand(1,999999));
-		
-		$this->width = $width;
-		$this->height = $height;
+		parent::__construct($width, $height);
 	}
 	
-	public function addSet($setKey, $label, $extra = null)
+	protected function drawPlot()
 	{
-		$this->sets["$setKey"] = array(
-			'label' => $label
-			, 'data' => array()
-		);
-		
-		if(!empty($extra))
-		{
-			$this->sets["$setKey"]['extra'] = $extra;
-		}
-	}
-	
-	public function addData($setKey, $k, $v)
-	{
-		$this->sets["$setKey"]['data'][] = array($k, $v);
-	}
-	
-	public function draw()
-	{
-		echo '<div id="' . $this->_id . '" style="width:1200;height:700px"></div>';
-		echo '<script type="text/javascript">';
-		echo 'var datasets = {';
-		
-		foreach($this->sets AS $key => $meta)
-		{
-			echo '"' . $key . '": {';
-			echo '	label:"' . $meta['label'] . '",';
-			echo '	data: [';
-			$bits = array();
-			foreach($meta['data'] AS $dk => $dval)
-			{
-				$bits[] = '[' . implode(',', $dval) . ']';
-			}
-			echo implode(',', $bits);
-			echo ']';
-			if(isset($meta['extra']))
-			{
-				echo ',' . $meta['extra'];
-			}
-			echo '},';
-		}
-		
-		echo '};';
-		
-		echo '
-			var data = [];
-			$.each(datasets, function (k, v) {
-				data.push(datasets[k]);
-			});
+		return '
+
 		 
 			$.plot($("#' . $this->_id . '"), data, {
 				yaxes: [{min: -100}, {position: "right"}],
@@ -100,45 +31,10 @@ class FlotTimeLine
 				legend: {
 					position: "nw"
 				}
-			});		
-		';
-		
-		echo "
-		
-		 function showTooltip(x, y, contents) {
-				$('<div id=\"tooltip\">' + contents + '</div>').css( {
-					position: 'absolute',
-					display: 'none',
-					top: y + 5,
-					left: x + 5,
-					border: '1px solid #fdd',
-					padding: '2px',
-					'background-color': '#fee',
-					opacity: 0.80
-				}).appendTo('body').fadeIn(200);
-			}	
-		";
-		
-		echo '
-			$("#' . $this->_id . '").bind("plothover", function (event, pos, item) {
-				if (item) {
-					if (previousPoint != item.dataIndex) {
-						previousPoint = item.dataIndex;
-						
-						$("#tooltip").remove();
-						var x = item.datapoint[0].toFixed(2),
-							y = item.datapoint[1].toFixed(2);
-						
-						showTooltip(item.pageX, item.pageY, y);
-					}
-				}
-				else {
-					$("#tooltip").remove();
-					previousPoint = null;            
-				}
 			});
-		';
-		echo '</script>';
+
+
+		';	
 	}
 }
 
