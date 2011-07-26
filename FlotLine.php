@@ -33,7 +33,7 @@ class FlotLine
 	
 	private function drawDiv()
 	{
-		return '<div id="' . $this->_id . '" style="border: 1px solid red; width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
+		return '<div id="' . $this->_id . '" style="width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
 	}
 	
 	private function drawDataSets()
