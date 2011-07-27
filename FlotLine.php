@@ -121,11 +121,17 @@ class FlotLine
 	protected function drawExtra()
 	{
 		$str = "
-		
+
+			// Thanks: http://stackoverflow.com/questions/1990512/add-comma-to-numbers-every-three-digits-using-jquery
+			function digits(number){
+				number = \"\" + number;
+				return number.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, \"$1,\");
+			}
+
 		 function showTooltip(x, y, contents) {
 
 				if(contents.match(/\.00$/)) {
-					contents = parseInt(contents)
+					contents = digits(parseInt(contents))
 				}
 
 				$('<div id=\"tooltip\">' + contents + '</div>').css( {
