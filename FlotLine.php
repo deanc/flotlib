@@ -115,12 +115,15 @@ class FlotLine
 				$('<div id=\"tooltip\">' + contents + '</div>').css( {
 					position: 'absolute',
 					display: 'none',
-					top: y + 5,
-					left: x + 5,
-					border: '1px solid #fdd',
-					padding: '2px',
-					'background-color': '#fee',
-					opacity: 0.80
+					top: y-25,
+					left: x,
+					border: '0',
+					color: '#ddd',
+					padding: '4px',
+					'background-color': '#000',
+					opacity: 0.70,
+					'font-size': '10px',
+					'border-radius': '4px',
 				}).appendTo('body').fadeIn(200);
 			}	
 		";

@@ -26,11 +26,11 @@ class FlotTimeLine extends FlotLine
 				grid: { hoverable: true, clickable: true },
                 series: {
                          lines: { show: true , shadowSize:0},
-                         points: { show: false }
+                         points: { show: true }
                 },
 				legend: {
 					position: "nw"
-				}
+				},
 			});
 
 
