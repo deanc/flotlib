@@ -123,6 +123,11 @@ class FlotLine
 		$str = "
 		
 		 function showTooltip(x, y, contents) {
+
+				if(contents.match(/\.00$/)) {
+					contents = parseInt(contents)
+				}
+
 				$('<div id=\"tooltip\">' + contents + '</div>').css( {
 					position: 'absolute',
 					display: 'none',
