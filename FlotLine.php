@@ -40,6 +40,7 @@ class FlotLine
 	{
 		$str = 'var datasets = {';
 		
+		$c = 0;
 		foreach($this->sets AS $key => $meta)
 		{
 			$str .= '"' . $key . '": {';
@@ -56,6 +57,7 @@ class FlotLine
 			{
 				$str .= ',' . $meta['extra'];
 			}
+			$str .= ',color: ' . $c;
 			$str .= '},';
 		}
 		
