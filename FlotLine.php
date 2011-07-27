@@ -94,17 +94,18 @@ class FlotLine
 	
 	public function draw()
 	{
-		echo $this->drawDiv();
+		$str = $this->drawDiv();
 		
-		echo '<script type="text/javascript">';
-
-		echo $this->drawDataSets();
+		$str .= '<script type="text/javascript">';
+		$str .= '$(document).ready(function () { ';
+		$str .= $this->drawDataSets();
 		
-		echo $this->drawPlot();
+		$str .= $this->drawPlot();
 		
-		echo $this->drawExtra();
-		
-		echo '</script>';
+		$str .= $this->drawExtra();
+		$str .= ' })';
+		$str .= '</script>';
+		return $str;
 	}
 	
 	protected function drawExtra()
