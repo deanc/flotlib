@@ -31,7 +31,7 @@ class FlotLine
 		$this->sets["$setKey"]['data'][] = array($k, $v);
 	}	
 	
-	private function drawDiv()
+	public function drawDiv()
 	{
 		return '<div id="' . $this->_id . '" style="width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
 	}
@@ -40,6 +40,7 @@ class FlotLine
 	{
 		$str = 'var datasets = {';
 		
+		$c = 0;
 		foreach($this->sets AS $key => $meta)
 		{
 			$str .= '"' . $key . '": {';
@@ -56,6 +57,7 @@ class FlotLine
 			{
 				$str .= ',' . $meta['extra'];
 			}
+			$str .= ',color: ' . $c;
 			$str .= '},';
 		}
 		
@@ -92,19 +94,28 @@ class FlotLine
 		';	
 	}
 	
-	public function draw()
+	public function draw($div = true, $scriptTags = true)
 	{
-		echo $this->drawDiv();
+		$str = '';
+		if($div)
+		{
+			$str .= $this->drawDiv();
+		}
 		
-		echo '<script type="text/javascript">';
-
-		echo $this->drawDataSets();
+		if($scriptTags) {
+			$str .= '<script type="text/javascript">';
+			}
+		$str .= '$(document).ready(function () { ';
+		$str .= $this->drawDataSets();
 		
-		echo $this->drawPlot();
+		$str .= $this->drawPlot();
 		
-		echo $this->drawExtra();
-		
-		echo '</script>';
+		$str .= $this->drawExtra();
+		$str .= ' })';
+		if($scriptTags) {
+			$str .= '</script>';
+		}
+		return $str;
 	}
 	
 	protected function drawExtra()
