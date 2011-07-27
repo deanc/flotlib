@@ -92,7 +92,7 @@ class FlotLine
 		';	
 	}
 	
-	public function draw($div = true)
+	public function draw($div = true, $scriptTags = true)
 	{
 		$str = '';
 		if($div)
@@ -100,7 +100,9 @@ class FlotLine
 			$str .= $this->drawDiv();
 		}
 		
-		$str .= '<script type="text/javascript">';
+		if($scriptTags) {
+			$str .= '<script type="text/javascript">';
+			}
 		$str .= '$(document).ready(function () { ';
 		$str .= $this->drawDataSets();
 		
@@ -108,7 +110,9 @@ class FlotLine
 		
 		$str .= $this->drawExtra();
 		$str .= ' })';
-		$str .= '</script>';
+		if($scriptTags) {
+			$str .= '</script>';
+		}
 		return $str;
 	}
 	
