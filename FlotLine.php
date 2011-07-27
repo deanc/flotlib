@@ -31,7 +31,7 @@ class FlotLine
 		$this->sets["$setKey"]['data'][] = array($k, $v);
 	}	
 	
-	private function drawDiv()
+	public function drawDiv()
 	{
 		return '<div id="' . $this->_id . '" style="width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
 	}
@@ -92,9 +92,13 @@ class FlotLine
 		';	
 	}
 	
-	public function draw()
+	public function draw($div = true)
 	{
-		$str = $this->drawDiv();
+		$str = '';
+		if($div)
+		{
+			$str .= $this->drawDiv();
+		}
 		
 		$str .= '<script type="text/javascript">';
 		$str .= '$(document).ready(function () { ';
