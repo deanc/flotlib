@@ -44,7 +44,7 @@ class FlotLine
 		foreach($this->sets AS $key => $meta)
 		{
 			$str .= '"' . $key . '": {';
-			$str .= '	label:"' . $meta['label'] . '",';
+			$str .= isset($meta['label']) ? '	label:"' . $meta['label'] . '",' : '';
 			$str .= '	data: [';
 			$bits = array();
 			foreach($meta['data'] AS $dk => $dval)
