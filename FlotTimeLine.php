@@ -12,26 +12,28 @@ class FlotTimeLine extends FlotLine
 	
 	protected function drawPlot()
 	{
-		return '
 
-		 
-			$.plot($("#' . $this->_id . '"), data, {
-				yaxes: [{min: -100}, {position: "right"}],
+		return '
+		var options = {
+				yaxes: [{min: 0}, {position: "right"}],
 				xaxis: { 
 					mode: "time",
-					timeformat: "%b-%y",
+					timeformat: "%d-%b-%y",
 					monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 					minTickSize: [1, "month"]
 				},
 				grid: { hoverable: true, clickable: true },
                 series: {
                          lines: { show: true , shadowSize:0},
-                         points: { show: true }
+                         points: { show: false }
                 },
 				legend: {
 					position: "nw"
 				},
-			});
+				selection: { mode: "x" }
+			}
+		
+		var plot =	$.plot($("#' . $this->_id . '"), data, options);
 
 
 		';	
