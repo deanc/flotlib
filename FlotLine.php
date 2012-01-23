@@ -4,6 +4,7 @@ class FlotLine
 {
 	protected $sets = array();
 	protected $_id;
+	protected $settings = array();
 	
 	function __construct($width = 1000, $height = 500)
 	{
@@ -25,7 +26,9 @@ class FlotLine
 			$this->sets["$setKey"]['extra'] = $extra;
 		}
 	}
-	
+	public function addSettings($setting = NULL) {
+		$this->settings = $setting;
+	}
 	public function addData($setKey, $k, $v)
 	{
 		$this->sets["$setKey"]['data'][] = array($k, $v);
@@ -57,7 +60,7 @@ class FlotLine
 			{
 				$str .= ',' . $meta['extra'];
 			}
-			$str .= ',color: ' . $c;
+//			$str .= ',color: ' . $c;
 			$str .= '},';
 		}
 		
@@ -130,21 +133,18 @@ class FlotLine
 
 		 function showTooltip(x, y, contents) {
 
-				if(contents.match(/\.00$/)) {
-					contents = digits(parseInt(contents))
-				}
-
+			
 				$('<div id=\"tooltip\">' + contents + '</div>').css( {
 					position: 'absolute',
 					display: 'none',
-					top: y-25,
+					top: y-50,
 					left: x,
 					border: '0',
 					color: '#ddd',
 					padding: '4px',
 					'background-color': '#000',
 					opacity: 0.70,
-					'font-size': '10px',
+					'font-size': '14px',
 					'border-radius': '4px',
 				}).appendTo('body').fadeIn(200);
 			}	
@@ -160,7 +160,21 @@ class FlotLine
 						var x = item.datapoint[0].toFixed(2),
 							y = item.datapoint[1].toFixed(2);
 						
-						showTooltip(item.pageX, item.pageY, y);
+						if(y.match(/\.00$/)) {
+							y = digits(parseInt(y))
+						}
+						';
+						if (isset($this->settings['xTooltipDate']) && $this->settings['xTooltipDate'] == true) {
+							$str .= '
+							var d = new Date(parseInt(x));
+							showTooltip(item.pageX, item.pageY, d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+"</br>"+y);
+							';
+						} else {
+							
+							$str .= 'showTooltip(item.pageX, item.pageY, y);';
+							
+						}
+					$str .='
 					}
 				}
 				else {
