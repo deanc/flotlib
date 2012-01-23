@@ -167,7 +167,7 @@ class FlotLine
 						if (isset($this->settings['xTooltipDate']) && $this->settings['xTooltipDate'] == true) {
 							$str .= '
 							var d = new Date(parseInt(x));
-							showTooltip(item.pageX, item.pageY, d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+"</br>"+y);
+							showTooltip(item.pageX, item.pageY, d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear()+"</br>"+y);
 							';
 						} else {
 							
