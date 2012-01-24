@@ -18,7 +18,7 @@ class FlotTimeLine extends FlotLine
 				yaxes: [{min: 0}, {position: "right"}],
 				xaxis: { 
 					mode: "time",
-					timeformat: "%d-%b-%y",
+					timeformat: "'.$this->settings['x']['timeformat'].'",
 					monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 					minTickSize: [1, "month"]
 				},
