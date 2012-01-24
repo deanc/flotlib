@@ -12,6 +12,8 @@ class FlotLine
 		
 		$this->width = $width;
 		$this->height = $height;
+		$this->settings['x']['timeformat'] = '%b-%y';
+
 	}
 	
 	public function addSet($setKey, $label, $extra = null)
@@ -27,7 +29,11 @@ class FlotLine
 		}
 	}
 	public function addSettings($setting = NULL) {
-		$this->settings = $setting;
+		if (is_array($setting)) {
+			foreach($setting as $key => $value) {
+				$this->settings[$key] = $value;
+			}
+		}
 	}
 	public function addData($setKey, $k, $v)
 	{
