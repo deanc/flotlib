@@ -9,6 +9,12 @@
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../flot/excanvas.min.js"></script><![endif]-->
 	<script src="../flot/jquery.js" type="text/javascript"></script>
 	<script src="../flot/jquery.flot.js" type="text/javascript"></script>
+    <script src="../flot/jquery.flot.time.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        if($.plot == null) {
+            alert('Download flot and put it in the project root under the "flot" directory');
+        }
+    </script>
 </head>
 
 <body>
@@ -17,27 +23,29 @@
 
 <?php
 
-require_once('../FlotTimeLine.php');
+function __autoload($class_name) {
+    include '../'. $class_name . '.php';
+}
 
-	$flot = new FlotTimeLine;
-	
-	// add 1 data set
-	$flot->addSet('balance1', 'Balance 1', 'points: { show: true }');
-	$flot->addData('balance1', strtotime('01/01/2011')*1000, 900);
-	$flot->addData('balance1', strtotime('02/01/2011')*1000, 1250);
-	$flot->addData('balance1', strtotime('03/01/2011')*1000, 1900);
-	$flot->addData('balance1', strtotime('04/01/2011')*1000, 1900);
-	$flot->addData('balance1', strtotime('05/01/2011')*1000, 1900);
-	
-	// add another data set
-	$flot->addSet('balance2', 'Balance 2', 'yaxis: 2, points: { show: true }');
-	$flot->addData('balance2', strtotime('01/01/2011')*1000, 2010);
-	$flot->addData('balance2', strtotime('02/01/2011')*1000, 1789);
-	$flot->addData('balance2', strtotime('03/01/2011')*1000, 1978);
-	$flot->addData('balance2', strtotime('04/01/2011')*1000, 1200);
-	$flot->addData('balance2', strtotime('05/01/2011')*1000, 1500);	
-	
-	echo $flot->draw();
+$flot = new DC\FlotLib\FlotTimeLine(1000, 500);
+
+// add 1 data set
+$flot->addSet('balance1', 'Balance 1', 'points: { show: true }');
+$flot->addData('balance1', strtotime('01/01/2011')*1000, 900);
+$flot->addData('balance1', strtotime('02/01/2011')*1000, 1250);
+$flot->addData('balance1', strtotime('03/01/2011')*1000, 1900);
+$flot->addData('balance1', strtotime('04/01/2011')*1000, 1900);
+$flot->addData('balance1', strtotime('05/01/2011')*1000, 1900);
+
+// add another data set
+$flot->addSet('balance2', 'Balance 2', 'yaxis: 2, points: { show: true }');
+$flot->addData('balance2', strtotime('01/01/2011')*1000, 2010);
+$flot->addData('balance2', strtotime('02/01/2011')*1000, 1789);
+$flot->addData('balance2', strtotime('03/01/2011')*1000, 1978);
+$flot->addData('balance2', strtotime('04/01/2011')*1000, 1200);
+$flot->addData('balance2', strtotime('05/01/2011')*1000, 1500);
+
+echo $flot->draw();
 
 ?>
 </body>
