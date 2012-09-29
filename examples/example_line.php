@@ -21,7 +21,6 @@ require_once('../FlotTimeLine.php');
 
 	$flot = new FlotTimeLine;
 	
-
 	// add 1 data set
 	$flot->addSet('balance1', 'Balance 1', 'points: { show: true }');
 	$flot->addData('balance1', strtotime('01/01/2011')*1000, 900);
@@ -31,7 +30,7 @@ require_once('../FlotTimeLine.php');
 	$flot->addData('balance1', strtotime('05/01/2011')*1000, 1900);
 	
 	// add another data set
-	$flot->addSet('balance2', 'Balance 2', 'yaxis: 2,points: { show: true }');
+	$flot->addSet('balance2', 'Balance 2', 'yaxis: 2, points: { show: true }');
 	$flot->addData('balance2', strtotime('01/01/2011')*1000, 2010);
 	$flot->addData('balance2', strtotime('02/01/2011')*1000, 1789);
 	$flot->addData('balance2', strtotime('03/01/2011')*1000, 1978);

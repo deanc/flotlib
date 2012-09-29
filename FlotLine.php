@@ -1,5 +1,7 @@
 <?php
 
+namespace DC\FlotLib;
+
 class FlotLine
 {
 	protected $sets = array();

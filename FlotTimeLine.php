@@ -1,6 +1,6 @@
 <?php
 
-require_once('FlotLine.php');
+namespace DC\FlotLib;
 
 class FlotTimeLine extends FlotLine
 {
