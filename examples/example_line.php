@@ -10,6 +10,7 @@
 	<script src="../flot/jquery.js" type="text/javascript"></script>
 	<script src="../flot/jquery.flot.js" type="text/javascript"></script>
     <script src="../flot/jquery.flot.time.js" type="text/javascript"></script>
+    <script src="../flot/jquery.flot.resize.js" type="text/javascript"></script>
     <script type="text/javascript">
         if($.plot == null) {
             alert('Download flot and put it in the project root under the "flot" directory');
@@ -27,7 +28,7 @@ function __autoload($class_name) {
     include '../'. $class_name . '.php';
 }
 
-$flot = new DC\FlotLib\FlotTimeLine(1000, 500);
+$flot = new DC\FlotLib\FlotTimeLine("80%", 500);
 
 // add 1 data set
 $flot->addSet('balance1', 'Balance 1', 'points: { show: true }');

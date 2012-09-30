@@ -8,7 +8,7 @@ class FlotLine
 	protected $_id;
 	protected $settings = array();
 	
-	function __construct($width = 1000, $height = 500)
+	function __construct($width = 1000, $height = 500, $autoResize = false)
 	{
 		$this->_id = md5(rand(1,999999));
 		
@@ -16,6 +16,7 @@ class FlotLine
 		$this->height = $height;
 		$this->settings['x']['timeformat'] = '%b-%y';
 
+        $this->autoResize = $autoResize;
 	}
 	
 	public function addSet($setKey, $label, $extra = null)
@@ -44,7 +45,9 @@ class FlotLine
 	
 	public function drawDiv()
 	{
-		return '<div id="' . $this->_id . '" style="width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
+		$html = '<div id="' . $this->_id . '" style="width:' . $this->width . 'px;height:' . $this->height .'px"></div>';
+
+        return $html;
 	}
 	
 	private function drawDataSets()
@@ -76,9 +79,9 @@ class FlotLine
 
 		$str .= '
 			var data = [];
-			$.each(datasets, function (k, v) {
-				data.push(datasets[k]);
-			});		
+			$.each(datasets, function (k,v) {
+			    data.push(datasets[k]);
+			});
 		';
 		
 		return $str;
